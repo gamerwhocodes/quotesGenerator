@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="quote-box">
+        <div class="quote-text">
+          <i class="fa fa-quote-left"> </i><span id="text">Quote goes here</span>
+        </div>
+        <div class="quote-author">
+          - <span id="author">Author</span>
+        </div>
+        <div class="buttons">          
+          <button class="button" id="new-quote">New quote</button>
+        </div>
+      </div>
+      <script>
+          const quote= document.getElementById('text');
+const author = document.getElementById('author');
+const btn= document.getElementById('new-quote');
+
+btn.addEventListener('click',getQuote);
+
+function getQuote()
+{
+fetch("http://api.quotable.io/random")
+  .then(res=>res.json())
+  .then(data=>{
+  quote.innerText=`${data.content}`
+  author.innerText=`${data.author}`
+}).catch(err=>{
+  quote.innerText=`${err}`;
+})
+}
+getQuote();
+      </script>
+</body>
+</html>
